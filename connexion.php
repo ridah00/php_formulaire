@@ -12,7 +12,7 @@
   <body class="anim">
 
     <main>
-      <section class="row justify-content-center">
+      <section class="row m-0 justify-content-center">
       <div class="col-3 mt-5">
         <form >
           <div class="mb-3">
