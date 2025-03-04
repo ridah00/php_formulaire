@@ -12,7 +12,7 @@
 </head>
 
 <body class="text-center anim">
-    <h1>Merci de votre inscription ! Vous pouvez
+    <h1>Merci de votre inscription <span class="text-danger"> <?= $_POST['firstname'] ?? '' ?> </span> ! Vous pouvez
         dorénavant vous <a href="connexion.html"> connecter.</a> <span>😊</span> </h1>
 </body>
 </html>
