@@ -68,8 +68,9 @@
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary m-2">Inscrire</button>
+                <a href="../Controller/controller-connexion.php" class="btn btn-success m-2">Connexion</a>
             </div>
-            <span class="text-danger" >(*) champs obligatoires</span>
+            <span class="text-danger">(*) champs obligatoires</span>
         </form>
     </div>
 

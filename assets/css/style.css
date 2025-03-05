@@ -1,7 +1,7 @@
 
 .anim {
     opacity: 0;
-    animation: animIn 1s forwards;
+    animation: animIn 2s forwards;
 }
 
 @keyframes animIn {

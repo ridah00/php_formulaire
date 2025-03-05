@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,6 @@
 
 <body class="text-center anim">
     <h1>Merci de votre inscription <span class="text-danger"> <?= $_POST['firstname'] ?? '' ?> </span> ! Vous pouvez
-        dorénavant vous <a href="connexion.html"> connecter.</a> <span>😊</span> </h1>
+        dorénavant vous <a href="../Controller/controller-connexion.php"> connecter.</a> <span>😊</span> </h1>
 </body>
 </html>

@@ -1,3 +1,3 @@
 <?php
-header('Location: ../src/Controller/controller-inscription.php');
+header('Location: ../src/Controller/controller-connexion.php');
 exit;

@@ -1,0 +1,2 @@
+insert into `76_users` (user_lastname,user_firstname,user_pseudo,user_birthdate,user_mail,user_password,user_gender) 
+values ('fadli','saïd','saïd00','2002-07-04','saidfadli213@gmail.com','said12345','homme')
