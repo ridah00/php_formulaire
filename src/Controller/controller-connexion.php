@@ -1,11 +1,14 @@
 <?php
-session_start();
+
 require_once('../../config.php');
 $regex_email = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 $regex_pseudo = "/^[a-zA-Z0-9-_.]{5,20}$/";
 $regex_pwd_8 = "/[a-zA-Z0-9_@.]{8,30}$/";
 $errors = [];
 
+if (isset($_SESSION)) {
+    header('Location: controller-profil.php');
+}
 
 
 
@@ -36,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (password_verify($_POST['password'], $user['user_password'])) {
+            session_start();
             $_SESSION = $user;
+            unset($_SESSION['password']);
+            
             header('Location: controller-profil.php');
         } else {
             $errors['password'] = 'password incorrecte';
