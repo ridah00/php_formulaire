@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($_POST['password'], $user['user_password'])) {
             session_start();
             $_SESSION = $user;
-            unset($_SESSION['password']);
+            unset($_SESSION['user_password']);
             
-            header('Location: controller-profil.php');
+            header('Location: controller-accueil.php');
         } else {
             $errors['password'] = 'password incorrecte';
 
