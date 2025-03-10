@@ -27,10 +27,11 @@ if (!isset($_SESSION['user_id'])) {
     $sql = "SELECT a.post_id,b.pic_name,a.user_id,count(distinct c.com_id) as nombre_com,count(distinct d.like_id) as nombre_like
             from `76_posts` as a 
             join `76_pictures` as b on a.post_id = b.post_id
-            join `76_comments` as c on a.post_id = c.post_id
-            join `76_likes` as d on a.post_id = d.post_id
+            left join `76_comments` as c on a.post_id = c.post_id
+            left join `76_likes` as d on a.post_id = d.post_id
             where  a.user_id = " . $_SESSION['user_id']. "
-            group by a.post_id,b.pic_name,a.user_id;";
+            GROUP BY a.post_id,b.pic_name,a.user_id
+            ORDER BY a.post_timestamp desc;";
 
     $stmt=$pdo->query($sql);
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);

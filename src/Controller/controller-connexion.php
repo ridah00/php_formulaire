@@ -6,6 +6,7 @@ $regex_pseudo = "/^[a-zA-Z0-9-_.]{5,20}$/";
 $regex_pwd_8 = "/[a-zA-Z0-9_@.]{8,30}$/";
 $errors = [];
 
+
 if (isset($_SESSION)) {
     header('Location: controller-profil.php');
 }
@@ -42,11 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
             $_SESSION = $user;
             unset($_SESSION['user_password']);
-            
             header('Location: controller-accueil.php');
         } else {
             $errors['password'] = 'password incorrecte';
-
         }
     }
     $pdo = null;

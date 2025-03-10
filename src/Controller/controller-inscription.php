@@ -39,13 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
     $stmt->execute();
-    $pdo=null;
+    $pdo = null;
 
     if (empty($_POST["pseudo"])) {
         $errors['pseudo'] = 'champs obligatoire';
-    }elseif (!preg_match($regex_pseudo, $_POST["pseudo"])) {
+    } elseif (!preg_match($regex_pseudo, $_POST["pseudo"])) {
         $errors['pseudo'] = 'caracteres non autorisés';
-    }elseif ($stmt->rowCount()==1) {
+    } elseif ($stmt->rowCount() == 1) {
         $errors['pseudo'] = 'Ce pseudo est déja utilisé';
     }
 
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
     $stmt->execute();
-    $pdo=null;
+    $pdo = null;
 
 
 
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $errors['mail'] = 'champs obligatoire';
     } elseif (!preg_match($regex_email, $_POST["mail"])) {
         $errors['mail'] = 'syntaxe autorisé = (***@**.***)';
-    }elseif ($stmt->rowCount()==1) {
+    } elseif ($stmt->rowCount() == 1) {
         $errors['mail'] = 'Ce mail est déja utilisé';
     }
 
@@ -119,8 +119,18 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $stmt->bindValue(':gender',    safe_input($_POST['gender']), PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-            header('Location: controller-confirmation.php');
-            exit();
+            $last_user_id = $pdo->lastInsertId();
+
+            $destination = __DIR__ . "/../../assets/img/" . $last_user_id . "/avatar";
+            $source = __DIR__ . "/../../assets/img/avatar_default.jpg";
+            $new_file = $destination . '/avatar_default.jpg';
+
+            if (mkdir($destination, 0777, true)) {
+                if (copy($source, $new_file)) {
+                    header('Location: controller-confirmation.php');
+                    exit();
+                }
+            }
         };
         $pdo = null;
     }
