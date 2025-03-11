@@ -102,7 +102,7 @@
                 <div class="col-sm-9 row m-0 p-0">
                     <?php for ($i = 0; $i < count($posts); $i++) { ?>
                         <div class="col-4 p-1 position-relative">
-                        <a href="../Controller/controller-post_detail.php?id=<?= $posts[$i]['user_id'] ?>"><img src="../../assets/img/<?= $posts[$i]['user_id'] ?>/<?= $posts[$i]['pic_name'] ?>" class="post_img" alt=""></a>
+                        <a href="../Controller/controller-post_detail.php?id=<?= $posts[$i]['post_id'] ?>"><img src="../../assets/img/<?= $posts[$i]['user_id'] ?>/<?= $posts[$i]['pic_name'] ?>" class="post_img" alt=""></a>
                             <span class="px-3 text-light fw-bold fs-sm-4 position-absolute bottom-0 end-0">
                                 <?= $posts[$i]['nombre_like'] ?> <i class="fa-solid fa-heart"></i>
                                 <?= $posts[$i]['nombre_com'] ?> <i class="fa-solid fa-comment"></i>
