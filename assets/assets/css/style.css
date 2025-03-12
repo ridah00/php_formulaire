@@ -1,0 +1,14 @@
+
+.anim {
+    opacity: 0;
+    animation: animIn 2s forwards;
+}
+
+@keyframes animIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
