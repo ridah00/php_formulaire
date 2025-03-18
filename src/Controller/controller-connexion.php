@@ -11,23 +11,13 @@ if (isset($_SESSION)) {
     header('Location: controller-profil.php');
 }
 
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT * from `76_users` where user_mail = :mail OR user_pseudo = :mail ;";
+    $sql = "SELECT user_id,user_mail,user_pseudo,user_pseudo from `76_users` where user_mail = :mail OR user_pseudo = :mail ;";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
     $stmt->execute();
-
-
-
-    if (empty($_POST["password"])) {
-        $errors['password'] = 'champs obligatoire';
-    }
-
 
     if (empty($_POST["mail"])) {
         $errors['mail'] = 'champs obligatoire';
@@ -35,14 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['mail'] = "utilisateur n'existe pas pensez bien a vous inscrire";
     }
 
+    if (empty($_POST["password"])) {
+        $errors['password'] = 'champs obligatoire';
+    }
+
 
     if (empty($errors)) {
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (password_verify($_POST['password'], $user['user_password'])) {
             session_start();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION = $user;
-            unset($_SESSION['user_password']);
             header('Location: controller-accueil.php');
         } else {
             $errors['password'] = 'password incorrecte';

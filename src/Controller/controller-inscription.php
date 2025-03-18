@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
     $stmt->execute();
-    $pdo = null;
+    
 
     if (empty($_POST["pseudo"])) {
         $errors['pseudo'] = 'champs obligatoire';
@@ -49,8 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $errors['pseudo'] = 'Ce pseudo est déja utilisé';
     }
 
-    $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     $sql = "SELECT * from `76_users` where user_mail = :mail;";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
