@@ -16,7 +16,9 @@
         top: 0;
         height: 100vh;
     }
-
+    #like_button:hover{
+        cursor: pointer;
+    }
     .post_img {
         width: 100%;
         height: 40rem;
@@ -29,7 +31,10 @@
     }
 
     @media (max-width: 600px) {
-
+        .post_img {
+            width: 100%;
+            height: 20rem;
+        }
 
         main {
             flex-direction: column;
@@ -110,13 +115,13 @@
                     </div>
                     <a href="../Controller/controller-post_detail.php?id=<?= $post['post_id'] ?>"><img src="../../assets/img/<?= $post['user_id'] ?>/<?= $post['pic_name'] ?>" class="card-img-top post_img" alt="<?= $post['pic_name'] ?>"></a>
                     <div class="fs-1 m-1 d-flex gap-3">
-                        <div class="d-flex gap-2">
-                            <?php if (liked_or_not($pdo, $post['post_id'] , $_SESSION['user_id'])) { ?>
-                                <i class="fa-solid text-danger fa-heart"></i>
-                                <?php }else { ?>
-                                <i class="col fa-regular fa-heart"></i>
+                        <div id="like_icon" class="d-flex gap-2">
+                            <?php if (liked_or_not($pdo, $post['post_id'], $_SESSION['user_id'])) { ?>
+                                <i data-postid='<?= $post['post_id'] ?>' id="like_button" class="fa-solid text-danger fa-heart"></i>
+                            <?php } else { ?>
+                                <i data-postid='<?= $post['post_id'] ?>' id="like_button" class="col fa-regular fa-heart"></i>
                             <?php  } ?>
-                            <p class="fs-5 text-center"> <?= count_total_like($post, $pdo) ?> </p>
+                            <p id="like_number" class="fs-5 text-center"> <?= count_total_like($post, $pdo) ?> </p>
                         </div>
                         <div class="d-flex gap-2">
                             <i class="fa-regular fa-comment"></i>
@@ -135,8 +140,8 @@
     </main>
 
 
-    
 
+    <script src="../../assets/js/like_post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/f9a12e2310.js" crossorigin="anonymous"></script>
 </body>

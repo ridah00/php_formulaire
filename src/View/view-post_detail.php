@@ -16,7 +16,9 @@
         top: 0;
         height: 100vh;
     }
-
+    #like_button:hover{
+        cursor: pointer;
+    }
     main {
         gap: 20rem;
     }
@@ -105,28 +107,51 @@
                                 <i class="fa-solid fa-bars"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a href="#" class="dropdown-item">Modifier le post</a></li>
-                                <li><a href="#" class="dropdown-item">Supprimer le post</a></li>
+                                <li><a href="../Controller/controller-supp.php?post_id=<?= $post_detail[0]['post_id'] ?>" class="dropdown-item">Modifier le post</a></li>
+                                <li><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item">Supprimer le post</button></li>
                             </ul>
+                        </div>
+                    </div>
+                    <!-- modal supp_post -->
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Vous êtes sur de vouloir supprimer le post ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a href="../Controller/controller-supp.php?post_id=<?= $post_detail[0]['post_id'] ?>" type="button" class="btn btn-primary">Supprimer</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>
             </div>
 
             <div>
-                <img class="post_img" src="<?= "../../assets/img/" . $post_detail[0]['user_id'] . "/" . $post_detail[0]['pic_name'] ?>" alt="<?= $post_detail[0]['pic_name'] ?>">
+                <img class="post_img" src="<?= "../../assets/img/". $post_detail[0]['user_id'] . "/" . $post_detail[0]['pic_name'] ?>" alt="<?= $post_detail[0]['pic_name'] ?>">
             </div>
 
 
             <div>
                 <div class="fs-1 m-1 d-flex gap-3">
-                    <div class="d-flex gap-2">
-                        <?= ($liked) ? '<i class="fa-solid text-danger fa-heart"></i>' : '<i class="col fa-regular fa-heart"></i>' ?>
-                        <p class="fs-5 text-center"> <?= $likes_total ?> </p>
+                    <div id="like_icon" class="d-flex gap-2 align-items-center">
+                        <?= ($liked) ?
+                        '<i data-postid='.$post_detail[0]['post_id'].' id="like_button" class="fa-solid text-danger fa-heart"></i>' 
+                        :
+                        '<i data-postid='.$post_detail[0]['post_id']. ' id="like_button" class="col fa-regular fa-heart"></i>' 
+                        ?>
+                        <p id="like_number" class="fs-5 mb-0"> <?= $likes_total ?> </p>
                     </div>
-                    <div class="d-flex gap-2">
-                        <i class="fa-regular fa-comment"></i>
-                        <p class="fs-5 text-center"> <?= $comments_total ?> </p>
+                    <div class="d-flex gap-2 align-items-center">
+                        <a href="#make_a_comment" class="text-dark"><i class="fa-regular fa-comment"></i></a>
+                        <p class="fs-5 mb-0 "> <?= $comments_total ?> </p>
                     </div>
                 </div>
                 <div class="mb-2">
@@ -149,7 +174,7 @@
                 <?php } ?>
 
                 <form action="" method="POST">
-                    <div class="col-md p-0">
+                    <div id="make_a_comment" class="col-md p-0">
                         <input type="text" class="col-12 my-2 p-2 rounded" name="commentaire" placeholder="Ajouter un commentaire ...">
                         <span class="text-danger"><?= $com_errors ?? '' ?></span>
                     </div>
@@ -161,8 +186,7 @@
     </main>
 
 
-
-
+    <script src="../../assets/js/like_post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/f9a12e2310.js" crossorigin="anonymous"></script>
 </body>
